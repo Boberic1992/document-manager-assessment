@@ -2,4 +2,60 @@
   border: dotted deeppink;
   padding: 20px;
   text-align: left;
+  position: relative;
+}
+
+.file-version-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.file-details-tooltip {
+  position: absolute;
+  top: 0;
+  left: 105%;
+  z-index: 10;
+  background: #f9f9f9;
+  color: #222;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 0.5rem 0.8rem;
+  min-width: 400px;
+  font-size: 0.88rem;
+  white-space: pre-line;
+  opacity: 0.95;
+  transition: box-shadow 0.2s, background 0.2s;
+  max-width: 600px;
+  word-break: break-all;
+}
+
+.download-btn {
+  padding: 0.5rem 1.2rem;
+  background: #28a745;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.download-btn:hover {
+  background: #1e7e34;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background 0.2s;
+}
+
+.delete-btn:hover {
+  background: #a71d2a;
 }
