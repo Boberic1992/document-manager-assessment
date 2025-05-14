@@ -22,7 +22,6 @@ def test_file_upload_and_list(user):
     assert response.status_code == 201
     data = response.json()
     assert data["file_name"] == "test_api_file_version.py"
-    # list all file versions
     response = client.get("/api/file_versions/")
     assert response.status_code == 200
     assert len(response.json()) == 1
@@ -87,7 +86,6 @@ def test_fetch_specific_version(user):
 @pytest.mark.django_db
 def test_unauthenticated_cannot_upload_or_fetch():
     client = APIClient()
-    # try to upload
     f = io.BytesIO(b"data")
     f.name = "unauth.txt"
     response = client.post(
@@ -96,7 +94,6 @@ def test_unauthenticated_cannot_upload_or_fetch():
         format="multipart"
     )
     assert response.status_code in (401, 403)
-    # try to fetch
     response = client.get("/api/file_versions/")
     assert response.status_code in (401, 403)
 
@@ -105,6 +102,5 @@ def test_fetch_nonexistent_version_returns_404(user):
     client = APIClient()
     client.force_authenticate(user=user)
     path = "/documents/test/missing.txt"
-    # no upload
     response = client.get(f"/api/file_versions/by_path/?path={path}&version=1")
     assert response.status_code == 404

@@ -9,20 +9,12 @@ from rest_framework.decorators import action
 from ..models import FileVersion
 from .serializers import FileVersionSerializer
 
-# class FileVersionViewSet(RetrieveModelMixin, ListModelMixin, GenericViewSet):
-#     authentication_classes = []
-#     permission_classes = []
-#     serializer_class = FileVersionSerializer
-#     queryset = FileVersion.objects.all()
-#     lookup_field = "id"
-
 class FileVersionViewSet(viewsets.ModelViewSet):
     serializer_class = FileVersionSerializer
     permission_classes = [permissions.IsAuthenticated]
     queryset = FileVersion.objects.all()
 
     def get_queryset(self):
-        # Only return files owned by the authenticated user
         return FileVersion.objects.filter(owner=self.request.user).order_by('-created_at')
 
     def perform_create(self, serializer):

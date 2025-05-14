@@ -15,7 +15,6 @@ class FileVersionSerializer(serializers.ModelSerializer):
 
         validated_data.pop('owner', None)
 
-        # Find the latest version number for this user/path
         latest = FileVersion.objects.filter(owner=user, path=path).order_by('-version_number').first()
         version_number = (latest.version_number + 1) if latest else 1
 

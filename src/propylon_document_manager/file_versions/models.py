@@ -35,18 +35,11 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class User(AbstractUser):
-    """
-    Default custom user model for Propylon Document Manager.
-    If adding fields that need to be filled at user signup,
-    check forms.SignupForm and forms.SocialSignupForms accordingly.
-    """
-
-    # First and last name do not cover name patterns around the globe
     name = CharField(_("Name of User"), blank=True, max_length=255)
-    first_name = None  # type: ignore
-    last_name = None  # type: ignore
+    first_name = None
+    last_name = None
     email = EmailField(_("email address"), unique=True)
-    username = None  # type: ignore
+    username = None
     objects = UserManager()
 
     USERNAME_FIELD = "email"
@@ -66,7 +59,7 @@ class FileVersion(models.Model):
     file_name = models.CharField(max_length=512)
     version_number = models.IntegerField()
     file = models.FileField(upload_to="uploads/")
-    path = models.CharField(max_length=1024)  # The user-specified URL
+    path = models.CharField(max_length=1024)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     content_hash = models.CharField(max_length=64, blank=True, db_index=True)
